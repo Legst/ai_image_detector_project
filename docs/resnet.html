@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI图像鉴别系统</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Arial, sans-serif;
+      background-color: #f0f2f5;
+      margin: 0;
+      padding: 0;
+    }
+
+    header {
+      background: linear-gradient(135deg, #27ae60, #2ecc71);
+      color: white;
+      padding: 2rem;
+      text-align: center;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 2rem;
+      padding: 2rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .card {
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+      transition: transform 0.2s;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+    }
+
+    .card-body {
+      padding: 1.5rem;
+      flex-grow: 1;
+    }
+
+    .card-title {
+      font-size: 1.25rem;
+      font-weight: 600;
+      color: #2c3e50;
+      margin: 0 0 1rem;
+    }
+
+    .feature-list {
+      padding: 0;
+      margin: 1rem 0;
+      list-style-type: none;
+    }
+
+    .feature-list li {
+      padding: 0.5rem 0;
+      border-bottom: 1px solid #eee;
+      font-size: 0.9rem;
+    }
+
+    .parameter-table {
+      width: 100%;
+      margin: 1rem 0;
+      border-collapse: collapse;
+    }
+
+    .parameter-table td {
+      padding: 0.5rem;
+      border: 1px solid #eee;
+    }
+
+    .video-demo {
+      background: white;
+      border-radius: 12px;
+      padding: 2rem;
+      margin: 2rem auto;
+      max-width: 800px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      text-align: center;
+    }
+
+    .video-container {
+      position: relative;
+      padding-bottom: 56.25%; /* 16:9 比例 */
+      height: 0;
+      overflow: hidden;
+      margin-top: 1rem;
+    }
+
+    .video-container iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border: none;
+      border-radius: 8px;
+    }
+
+    .source-section {
+      text-align: center;
+      padding: 3rem 0;
+      background: #f8f9fa;
+    }
+
+    .source-link {
+      display: inline-block;
+      background: #27ae60;
+      color: white;
+      padding: 1rem 2rem;
+      border-radius: 30px;
+      text-decoration: none;
+      font-size: 1.1rem;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .source-link:hover {
+      background: #219a52;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2);
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <h1>AI图像鉴别系统</h1>
+    <p>基于ResNet50的深度伪造图像检测解决方案</p>
+  </header>
+
+  <div class="container">
+    <div class="card">
+      <div class="card-body">
+        <div class="card-title">🧠 模型训练</div>
+        <ul class="feature-list">
+          <li>使用ResNet50预训练模型</li>
+          <li>自定义二分类全连接层</li>
+          <li>数据增强策略：
+            <table class="parameter-table">
+              <tr><td>随机水平翻转</td><td>随机旋转(±10°)</td></tr>
+              <tr><td>图像归一化</td><td>尺寸统一(224x224)</td></tr>
+            </table>
+          </li>
+          <li>训练参数：
+            <table class="parameter-table">
+              <tr><td>Batch Size</td><td>32</td></tr>
+              <tr><td>Epochs</td><td>40</td></tr>
+              <tr><td>Learning Rate</td><td>0.001</td></tr>
+            </table>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-body">
+        <div class="card-title">🔍 图像鉴别</div>
+        <ul class="feature-list">
+          <li>支持格式：JPG/JPEG/PNG/BMP/TIFF</li>
+          <li>预处理流程：
+            <table class="parameter-table">
+              <tr><td>尺寸调整</td><td>224x224</td></tr>
+              <tr><td>归一化处理</td><td>ImageNet标准</td></tr>
+            </table>
+          </li>
+          <li>实时推理功能：
+            <table class="parameter-table">
+              <tr><td>批量处理</td><td>自动遍历目录</td></tr>
+              <tr><td>结果输出</td><td>CSV格式保存</td></tr>
+            </table>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-body">
+        <div class="card-title">🚀 模型部署</div>
+        <ul class="feature-list">
+          <li>硬件适配：
+            <table class="parameter-table">
+              <tr><td>GPU加速</td><td>CUDA支持</td></tr>
+              <tr><td>CPU兼容</td><td>自动切换设备</td></tr>
+            </table>
+          </li>
+          <li>模型管理：
+            <table class="parameter-table">
+              <tr><td>权重热加载</td><td>.pth格式</td></tr>
+              <tr><td>评估模式</td><td>torch.no_grad()</td></tr>
+            </table>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="video-demo">
+    <h2>🎬 系统成果展示</h2>
+    <p>视频演示AI图像鉴别系统的实际运行效果</p>
+    <div class="video-container">
+      <iframe src="assets/reset_vedio.mp4" 
+              frameborder="0" 
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+              allowfullscreen></iframe>
+    </div>
+  </div>
+
+  <div class="source-section">
+    <a href="https://github.com/Legst/ai_image_detector_project"
+       class="source-link"
+       target="_blank">
+       🛠️ 查看完整项目源码
+    </a>
+  </div>
+</body>
+
+</html>
