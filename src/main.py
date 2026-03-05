@@ -8,7 +8,7 @@ from PIL import Image
 # 模型加载
 model = resnet50(weights='DEFAULT')  # 使用torchvision中的resnet50，默认权重
 model.fc = torch.nn.Linear(model.fc.in_features, 2)  # 最后一层输出为2个类别
-model.load_state_dict(torch.load('model01.pth', map_location='cpu', weights_only=True))  # 加载我们模型的权重
+model.load_state_dict(torch.load('./model01.pth', map_location='cpu', weights_only=True))  # 加载我们模型的权重
 model.eval()
 
 # 数据转换
